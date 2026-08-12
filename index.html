@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Apresentações Absens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Absens Design System — tokens */
+    --primary-500:#1D3635;
+    --primary-400:#2E5857;
+    --primary-700:#121818;
+    --primary-50:#87CBC9;
+    --secondary-300:#31BCA4;
+    --terciary-500:#DAEA96;
+    --canvas:#F0F1EE;
+    --surface-card:#FFFFFF;
+    --surface-raised:#E3E5E0;
+    --hairline:#CACDC7;
+    --hairline-strong:#B2B6AE;
+    --ink:#020202;
+    --body:#6B6F66;
+    --muted:#9A9E95;
+    --on-primary:#FFFFFF;
+    --on-accent:#1D3635;
+    --rounded-md:8px;
+    --rounded-lg:12px;
+    --rounded-pill:9999px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:20px;
+    --space-6:24px;
+    --space-8:32px;
+    --space-12:48px;
+    --space-16:64px;
+    --space-20:80px;
+    --container:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:"Plus Jakarta Sans","Inter",system-ui,-apple-system,sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--space-6)}
+
+  header{background:var(--primary-500);color:var(--on-primary)}
+  header .wrap{padding-top:var(--space-20);padding-bottom:var(--space-16)}
+  .brand{
+    display:inline-flex;align-items:center;gap:var(--space-2);
+    font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--primary-50);
+  }
+  .brand .dot{width:8px;height:8px;border-radius:var(--rounded-pill);background:var(--terciary-500)}
+  h1{
+    margin:var(--space-5) 0 var(--space-4);
+    font-size:clamp(32px,5vw,56px);line-height:1.1;font-weight:800;letter-spacing:-.02em;
+  }
+  header p{margin:0;max-width:62ch;font-size:18px;line-height:1.6;color:var(--primary-50)}
+
+  main .wrap{padding-top:var(--space-16);padding-bottom:var(--space-20)}
+  h2{
+    margin:0 0 var(--space-6);
+    font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  }
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8)}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+
+  .card{
+    display:flex;flex-direction:column;
+    background:var(--surface-card);
+    border:1px solid var(--hairline);
+    border-left:3px solid var(--secondary-300);
+    border-radius:var(--rounded-lg);
+    padding:var(--space-6);
+    text-decoration:none;color:inherit;
+  }
+  .card:hover{border-color:var(--hairline-strong);border-left-color:var(--primary-400)}
+  .card .meta{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .card h3{margin:var(--space-3) 0 var(--space-2);font-size:20px;line-height:1.3;font-weight:700}
+  .card p{margin:0 0 var(--space-5);font-size:15px;line-height:1.6;color:var(--body)}
+  .card .open{
+    margin-top:auto;align-self:flex-start;
+    background:var(--terciary-500);color:var(--on-accent);
+    font-size:14px;font-weight:700;
+    padding:var(--space-3) var(--space-5);border-radius:var(--rounded-md);
+  }
+
+  .empty{
+    background:var(--surface-raised);
+    border:1px solid var(--hairline);
+    border-radius:var(--rounded-lg);
+    padding:var(--space-12);
+  }
+  .empty h3{margin:0 0 var(--space-3);font-size:20px;font-weight:700}
+  .empty p{margin:0;max-width:70ch;font-size:15px;line-height:1.7;color:var(--body)}
+  .empty code{
+    background:var(--surface-card);border:1px solid var(--hairline);
+    border-radius:4px;padding:2px 6px;font-size:13px;
+  }
+
+  footer{border-top:1px solid var(--hairline)}
+  footer .wrap{padding-top:var(--space-8);padding-bottom:var(--space-8)}
+  footer p{margin:0;font-size:13px;line-height:1.6;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="brand"><span class="dot"></span>Absens</span>
+    <h1>Apresentações</h1>
+    <p>Central de decks do Absens. Cada apresentação abre direto no navegador, em qualquer dispositivo, sem download e sem instalar nada. Os endereços são permanentes: atualizar o conteúdo não muda o link já compartilhado.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h2>Disponíveis</h2>
+
+    <div class="empty">
+      <h3>Nenhuma apresentação publicada ainda</h3>
+      <p>Cada deck vira uma pasta neste repositório e ganha um endereço próprio no padrão <code>/nome-do-deck/</code>. Ao publicar o primeiro, esta página passa a listá-lo aqui com título, contexto e botão de abrir.</p>
+    </div>
+
+    <!-- Modelo de card de deck — descomentar e ajustar ao publicar:
+    <div class="grid">
+      <a class="card" href="./ciclo-cpsi-recife/">
+        <span class="meta">Comercial · 18 min</span>
+        <h3>O ciclo CPSI no Recife</h3>
+        <p>História do produto Absens para secretários e diretores de Saúde, TI e Inovação.</p>
+        <span class="open">Abrir apresentação</span>
+      </a>
+    </div>
+    -->
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Absens · Beyond Co. — página interna, não indexada por buscadores. Quem tem o link acessa; quem não tem, não encontra.</p>
+  </div>
+</footer>
+
+</body>
+</html>
