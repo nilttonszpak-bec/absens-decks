@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Apresentações Absens</title>
+<title>Apresentações Absens — uso interno</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
     /* Absens Design System — tokens */
     --primary-500:#1D3635;
     --primary-400:#2E5857;
-    --primary-700:#121818;
+    --primary-600:#192E2D;
     --primary-50:#87CBC9;
     --secondary-300:#31BCA4;
     --terciary-500:#DAEA96;
@@ -27,9 +27,13 @@
     --muted:#9A9E95;
     --on-primary:#FFFFFF;
     --on-accent:#1D3635;
+    --warning:#f59e0b;
+    --warning-soft:#fffbeb;
+    --rounded-xs:4px;
     --rounded-md:8px;
     --rounded-lg:12px;
     --rounded-pill:9999px;
+    --space-1:4px;
     --space-2:8px;
     --space-3:12px;
     --space-4:16px;
@@ -52,8 +56,9 @@
   }
   .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--space-6)}
 
+  /* ---- hero ---- */
   header{background:var(--primary-500);color:var(--on-primary)}
-  header .wrap{padding-top:var(--space-20);padding-bottom:var(--space-16)}
+  header .wrap{padding-top:var(--space-16);padding-bottom:var(--space-12)}
   .brand{
     display:inline-flex;align-items:center;gap:var(--space-2);
     font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
@@ -66,14 +71,31 @@
   }
   header p{margin:0;max-width:62ch;font-size:18px;line-height:1.6;color:var(--primary-50)}
 
-  main .wrap{padding-top:var(--space-16);padding-bottom:var(--space-20)}
-  h2{
-    margin:0 0 var(--space-6);
+  /* ---- aviso de uso ---- */
+  .notice{
+    background:var(--warning-soft);
+    border:1px solid var(--hairline);
+    border-left:3px solid var(--warning);
+    border-radius:var(--rounded-lg);
+    padding:var(--space-6);
+  }
+  .notice-anchor{padding-top:var(--space-12)}
+  .notice h2{
+    margin:0 0 var(--space-2);
+    font-size:16px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);
+  }
+  .notice p{margin:0;max-width:80ch;font-size:15px;line-height:1.65;color:var(--body)}
+  .notice strong{color:var(--ink);font-weight:600}
+
+  /* ---- lista de decks ---- */
+  main .wrap{padding-bottom:var(--space-20)}
+  h2.section{
+    margin:var(--space-16) 0 var(--space-6);
     font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   }
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8)}
-  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8);align-items:start}
+  @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
 
   .card{
     display:flex;flex-direction:column;
@@ -82,32 +104,30 @@
     border-left:3px solid var(--secondary-300);
     border-radius:var(--rounded-lg);
     padding:var(--space-6);
-    text-decoration:none;color:inherit;
   }
-  .card:hover{border-color:var(--hairline-strong);border-left-color:var(--primary-400)}
-  .card .meta{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .card .meta{
+    display:flex;flex-wrap:wrap;gap:var(--space-2);
+    font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  }
+  .card .meta .sep{color:var(--hairline-strong)}
   .card h3{margin:var(--space-3) 0 var(--space-2);font-size:20px;line-height:1.3;font-weight:700}
-  .card p{margin:0 0 var(--space-5);font-size:15px;line-height:1.6;color:var(--body)}
-  .card .open{
-    margin-top:auto;align-self:flex-start;
-    background:var(--terciary-500);color:var(--on-accent);
-    font-size:14px;font-weight:700;
-    padding:var(--space-3) var(--space-5);border-radius:var(--rounded-md);
+  .card p{margin:0 0 var(--space-6);font-size:15px;line-height:1.6;color:var(--body)}
+  .actions{margin-top:auto;display:flex;flex-direction:column;align-items:stretch;gap:var(--space-2)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:inherit;font-size:14px;font-weight:600;line-height:1;
+    padding:var(--space-3) var(--space-5);
+    border-radius:var(--rounded-md);
+    text-decoration:none;border:1px solid transparent;
   }
+  .btn-primary{background:var(--primary-500);color:var(--on-primary)}
+  .btn-primary:hover{background:var(--primary-400)}
+  .btn-secondary{background:var(--surface-card);color:var(--ink);border-color:var(--hairline-strong)}
+  .btn-secondary:hover{background:var(--canvas);border-color:var(--primary-400)}
+  .filesize{font-weight:500;color:var(--muted);margin-left:var(--space-1)}
+  .btn-secondary:hover .filesize{color:var(--body)}
 
-  .empty{
-    background:var(--surface-raised);
-    border:1px solid var(--hairline);
-    border-radius:var(--rounded-lg);
-    padding:var(--space-12);
-  }
-  .empty h3{margin:0 0 var(--space-3);font-size:20px;font-weight:700}
-  .empty p{margin:0;max-width:70ch;font-size:15px;line-height:1.7;color:var(--body)}
-  .empty code{
-    background:var(--surface-card);border:1px solid var(--hairline);
-    border-radius:4px;padding:2px 6px;font-size:13px;
-  }
-
+  /* ---- rodapé ---- */
   footer{border-top:1px solid var(--hairline)}
   footer .wrap{padding-top:var(--space-8);padding-bottom:var(--space-8)}
   footer p{margin:0;font-size:13px;line-height:1.6;color:var(--muted)}
@@ -125,29 +145,36 @@
 
 <main>
   <div class="wrap">
-    <h2>Disponíveis</h2>
 
-    <div class="empty">
-      <h3>Nenhuma apresentação publicada ainda</h3>
-      <p>Cada deck vira uma pasta neste repositório e ganha um endereço próprio no padrão <code>/nome-do-deck/</code>. Ao publicar o primeiro, esta página passa a listá-lo aqui com título, contexto e botão de abrir.</p>
+    <div class="notice-anchor">
+      <div class="notice">
+        <h2>Página de uso interno da equipe</h2>
+        <p>Este endereço é da equipe Beyond Co. — <strong>não envie o link para o cliente.</strong> Para compartilhar externamente, baixe a apresentação em <strong>PDF</strong> e envie o arquivo. O link fica reservado a quem apresenta e à equipe interna.</p>
+      </div>
     </div>
 
-    <!-- Modelo de card de deck — descomentar e ajustar ao publicar:
+    <h2 class="section">Disponíveis</h2>
+
     <div class="grid">
-      <a class="card" href="./ciclo-cpsi-recife/">
-        <span class="meta">Comercial · 18 min</span>
-        <h3>O ciclo CPSI no Recife</h3>
-        <p>História do produto Absens para secretários e diretores de Saúde, TI e Inovação.</p>
-        <span class="open">Abrir apresentação</span>
-      </a>
+
+      <div class="card">
+        <span class="meta">Comercial <span class="sep">·</span> 5 slides <span class="sep">·</span> Interativa</span>
+        <h3>Apresentação Executiva</h3>
+        <p>Visão rápida do Absens: comunicação multicanal com o paciente, tecnologia adaptada à operação do SUS, dashboards de acompanhamento e os resultados em operação real.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="./apresentacao-executiva/">Abrir apresentação</a>
+          <a class="btn btn-secondary" href="./apresentacao-executiva/absens-apresentacao-executiva.pdf" download>Baixar PDF <span class="filesize">391 KB</span></a>
+          <a class="btn btn-secondary" href="./apresentacao-executiva/index.html" download="absens-apresentacao-executiva.html">Baixar HTML <span class="filesize">737 KB</span></a>
+        </div>
+      </div>
+
     </div>
-    -->
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Absens · Beyond Co. — página interna, não indexada por buscadores. Quem tem o link acessa; quem não tem, não encontra.</p>
+    <p>Absens · Beyond Co. — página interna, não indexada por buscadores. A versão em PDF é a que vai para o cliente.</p>
   </div>
 </footer>
 
