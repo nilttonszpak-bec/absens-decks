@@ -1,0 +1,41 @@
+name: Publicar arquivos das apresentacoes
+
+on:
+  push:
+    paths:
+      - '.assets.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Baixar arquivos declarados no manifesto
+        run: |
+          set -euo pipefail
+          jq -c '.[]' .assets.json > /tmp/itens.txt
+          while read -r item; do
+            url=$(echo "$item" | jq -r '.url')
+            dest=$(echo "$item" | jq -r '.dest')
+            mkdir -p "$(dirname "$dest")"
+            curl -fsSL "$url" -o "$dest"
+            echo "baixado: $dest ($(wc -c < "$dest") bytes)"
+          done < /tmp/itens.txt
+
+      - name: Commitar o que mudou
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'nada a commitar'
+          else
+            git commit -m 'Publica arquivos declarados no manifesto'
+            git push
+          fi
