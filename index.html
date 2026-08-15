@@ -93,9 +93,8 @@
     margin:var(--space-16) 0 var(--space-6);
     font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   }
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8);align-items:start}
-  @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-8);align-items:start}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
 
   .card{
     display:flex;flex-direction:column;
@@ -105,13 +104,41 @@
     border-radius:var(--rounded-lg);
     padding:var(--space-6);
   }
-  .card .meta{
-    display:flex;flex-wrap:wrap;gap:var(--space-2);
+  .cardtop{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:var(--space-4);flex-wrap:wrap;
+  }
+  .meta{
     font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
   }
-  .card .meta .sep{color:var(--hairline-strong)}
-  .card h3{margin:var(--space-3) 0 var(--space-2);font-size:20px;line-height:1.3;font-weight:700}
-  .card p{margin:0 0 var(--space-6);font-size:15px;line-height:1.6;color:var(--body)}
+  .meta .sep{color:var(--hairline-strong);padding:0 var(--space-1)}
+
+  /* seletor de tipo — extensão do DS (não há componente de abas no sistema) */
+  .switch{
+    display:inline-flex;align-items:center;gap:2px;
+    background:var(--surface-raised);
+    border:1px solid var(--hairline);
+    border-radius:var(--rounded-pill);
+    padding:3px;
+  }
+  .switch button{
+    font-family:inherit;font-size:12px;font-weight:600;line-height:1;
+    letter-spacing:.01em;color:var(--body);
+    background:transparent;border:0;cursor:pointer;
+    padding:7px 12px;border-radius:var(--rounded-pill);
+    white-space:nowrap;
+  }
+  .switch button:hover{color:var(--ink)}
+  .switch button[aria-pressed="true"]{background:var(--primary-500);color:var(--on-primary)}
+
+  .card h3{margin:var(--space-4) 0 var(--space-2);font-size:20px;line-height:1.3;font-weight:700}
+  .card p.desc{margin:0 0 var(--space-4);font-size:15px;line-height:1.6;color:var(--body)}
+  .variant{
+    margin:0 0 var(--space-6);
+    padding-left:var(--space-3);
+    border-left:2px solid var(--hairline);
+    font-size:13px;line-height:1.55;color:var(--muted);
+  }
   .actions{margin-top:auto;display:flex;flex-direction:column;align-items:stretch;gap:var(--space-2)}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;
@@ -149,7 +176,7 @@
     <div class="notice-anchor">
       <div class="notice">
         <h2>Página de uso interno da equipe</h2>
-        <p>Este endereço é da equipe Beyond Co. — <strong>não envie o link para o cliente.</strong> Para compartilhar externamente, baixe a apresentação em <strong>PDF</strong> e envie o arquivo. O link fica reservado a quem apresenta e à equipe interna.</p>
+        <p>Este endereço é da equipe Beyond Co. — <strong>não envie o link para o cliente.</strong> Para compartilhar externamente, use a versão <strong>Envio p/ cliente</strong> e mande o arquivo baixado. O link fica reservado a quem apresenta e à equipe interna.</p>
       </div>
     </div>
 
@@ -157,25 +184,39 @@
 
     <div class="grid">
 
-      <div class="card">
-        <span class="meta">Comercial <span class="sep">·</span> 5 slides <span class="sep">·</span> Interativa</span>
+      <div class="card" data-deck="apresentacao-executiva">
+        <div class="cardtop">
+          <span class="meta">Comercial <span class="sep">·</span> <span data-role="slides">7 slides</span></span>
+          <div class="switch" role="group" aria-label="Tipo de apresentação">
+            <button type="button" data-variant="vivo" aria-pressed="true">Uso ao vivo</button>
+            <button type="button" data-variant="cliente" aria-pressed="false">Envio p/ cliente</button>
+          </div>
+        </div>
         <h3>Apresentação Executiva</h3>
-        <p>Visão rápida do Absens: comunicação multicanal com o paciente, tecnologia adaptada à operação do SUS, dashboards de acompanhamento e os resultados em operação real.</p>
+        <p class="desc">Visão rápida do Absens: comunicação multicanal com o paciente, tecnologia adaptada à operação do SUS, dashboards de acompanhamento e os resultados em operação real.</p>
+        <p class="variant" data-role="variant">Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="./apresentacao-executiva/">Abrir apresentação</a>
-          <a class="btn btn-secondary" href="./apresentacao-executiva/absens-apresentacao-executiva.pdf" download>Baixar PDF <span class="filesize">391 KB</span></a>
-          <a class="btn btn-secondary" href="./apresentacao-executiva/index.html" download="absens-apresentacao-executiva.html">Baixar HTML <span class="filesize">737 KB</span></a>
+          <a class="btn btn-primary" data-role="open" href="./apresentacao-executiva/">Abrir apresentação</a>
+          <a class="btn btn-secondary" data-role="pdf" href="./apresentacao-executiva/absens-apresentacao-executiva.pdf" download>Baixar PDF <span class="filesize">461 KB</span></a>
+          <a class="btn btn-secondary" data-role="html" href="./apresentacao-executiva/index.html" download="absens-apresentacao-executiva.html">Baixar HTML <span class="filesize">822 KB</span></a>
         </div>
       </div>
 
-      <div class="card">
-        <span class="meta">Institucional <span class="sep">·</span> 15 slides <span class="sep">·</span> Interativa</span>
+      <div class="card" data-deck="case-inovacao-publica">
+        <div class="cardtop">
+          <span class="meta">Institucional <span class="sep">·</span> <span data-role="slides">15 slides</span></span>
+          <div class="switch" role="group" aria-label="Tipo de apresentação">
+            <button type="button" data-variant="vivo" aria-pressed="true">Uso ao vivo</button>
+            <button type="button" data-variant="cliente" aria-pressed="false">Envio p/ cliente</button>
+          </div>
+        </div>
         <h3>Case de Inovação Pública</h3>
-        <p>A trajetória do Absens do edital do Recife a três operações públicas: o problema do absenteísmo, a hipótese, o que a operação real ensinou, os resultados, as premiações e o caminho de contratação.</p>
+        <p class="desc">A trajetória do Absens do edital do Recife a três operações públicas: o problema do absenteísmo, a hipótese, o que a operação real ensinou, os resultados, as premiações e o caminho de contratação.</p>
+        <p class="variant" data-role="variant">Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="./case-inovacao-publica/">Abrir apresentação</a>
-          <a class="btn btn-secondary" href="./case-inovacao-publica/absens-case-inovacao-publica.pdf" download>Baixar PDF <span class="filesize">357 KB</span></a>
-          <a class="btn btn-secondary" href="./case-inovacao-publica/index.html" download="absens-case-inovacao-publica.html">Baixar HTML <span class="filesize">432 KB</span></a>
+          <a class="btn btn-primary" data-role="open" href="./case-inovacao-publica/">Abrir apresentação</a>
+          <a class="btn btn-secondary" data-role="pdf" href="./case-inovacao-publica/absens-case-inovacao-publica.pdf" download>Baixar PDF <span class="filesize">357 KB</span></a>
+          <a class="btn btn-secondary" data-role="html" href="./case-inovacao-publica/index.html" download="absens-case-inovacao-publica.html">Baixar HTML <span class="filesize">436 KB</span></a>
         </div>
       </div>
 
@@ -185,9 +226,65 @@
 
 <footer>
   <div class="wrap">
-    <p>Absens · Beyond Co. — página interna, não indexada por buscadores. A versão em PDF é a que vai para o cliente.</p>
+    <p>Absens · Beyond Co. — página interna, não indexada por buscadores. A versão de envio é a que vai para o cliente.</p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var VIVO = 'Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.';
+  var CLIENTE = 'Cada estado interativo virou um slide estático: nada se perde ao baixar e enviar.';
+
+  var DECKS = {
+    'apresentacao-executiva': {
+      vivo:    { slides:7,  dir:'./apresentacao-executiva/',
+                 pdf:'absens-apresentacao-executiva.pdf',           pdfKB:'461 KB',
+                 html:'absens-apresentacao-executiva.html',         htmlKB:'822 KB', nota:VIVO },
+      cliente: { slides:16, dir:'./apresentacao-executiva/cliente/',
+                 pdf:'absens-apresentacao-executiva-cliente.pdf',   pdfKB:'818 KB',
+                 html:'absens-apresentacao-executiva-cliente.html', htmlKB:'694 KB', nota:CLIENTE }
+    },
+    'case-inovacao-publica': {
+      vivo:    { slides:15, dir:'./case-inovacao-publica/',
+                 pdf:'absens-case-inovacao-publica.pdf',            pdfKB:'357 KB',
+                 html:'absens-case-inovacao-publica.html',          htmlKB:'436 KB', nota:VIVO },
+      cliente: { slides:23, dir:'./case-inovacao-publica/cliente/',
+                 pdf:'absens-case-inovacao-publica-cliente.pdf',    pdfKB:'619 KB',
+                 html:'absens-case-inovacao-publica-cliente.html',  htmlKB:'468 KB', nota:CLIENTE }
+    }
+  };
+
+  function aplica(card, chave){
+    var v = DECKS[card.dataset.deck][chave];
+    var q = function(sel){ return card.querySelector(sel); };
+
+    q('[data-role="slides"]').textContent = v.slides + ' slides';
+    q('[data-role="variant"]').textContent = v.nota;
+
+    q('[data-role="open"]').setAttribute('href', v.dir);
+
+    var pdf = q('[data-role="pdf"]');
+    pdf.setAttribute('href', v.dir + v.pdf);
+    pdf.querySelector('.filesize').textContent = v.pdfKB;
+
+    var html = q('[data-role="html"]');
+    html.setAttribute('href', v.dir + 'index.html');
+    html.setAttribute('download', v.html);
+    html.querySelector('.filesize').textContent = v.htmlKB;
+
+    Array.prototype.forEach.call(card.querySelectorAll('.switch button'), function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.variant === chave));
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.card[data-deck]'), function(card){
+    card.querySelector('.switch').addEventListener('click', function(e){
+      var b = e.target.closest('button[data-variant]');
+      if (b) aplica(card, b.dataset.variant);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
