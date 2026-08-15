@@ -13,8 +13,9 @@
     /* Absens Design System — tokens */
     --primary-500:#1D3635;
     --primary-400:#2E5857;
-    --primary-600:#192E2D;
     --primary-50:#87CBC9;
+    --secondary-500:#1F685F;
+    --secondary-400:#29937E;
     --secondary-300:#31BCA4;
     --terciary-500:#DAEA96;
     --canvas:#F0F1EE;
@@ -29,6 +30,8 @@
     --on-accent:#1D3635;
     --warning:#f59e0b;
     --warning-soft:#fffbeb;
+    --error:#ef4444;
+    --error-soft:#fef2f2;
     --rounded-xs:4px;
     --rounded-md:8px;
     --rounded-lg:12px;
@@ -71,21 +74,41 @@
   }
   header p{margin:0;max-width:62ch;font-size:18px;line-height:1.6;color:var(--primary-50)}
 
-  /* ---- aviso de uso ---- */
-  .notice{
-    background:var(--warning-soft);
+  /* ---- faixa de avisos ---- */
+  .avisos{
+    display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);
+    padding-top:var(--space-12);
+  }
+  @media(max-width:820px){.avisos{grid-template-columns:1fr}}
+
+  .aviso{
+    background:var(--surface-card);
     border:1px solid var(--hairline);
-    border-left:3px solid var(--warning);
     border-radius:var(--rounded-lg);
     padding:var(--space-6);
   }
-  .notice-anchor{padding-top:var(--space-12)}
-  .notice h2{
-    margin:0 0 var(--space-2);
+  .aviso h2{
+    margin:0 0 var(--space-3);
     font-size:16px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);
   }
-  .notice p{margin:0;max-width:80ch;font-size:15px;line-height:1.65;color:var(--body)}
-  .notice strong{color:var(--ink);font-weight:600}
+  .aviso p{margin:0;font-size:15px;line-height:1.65;color:var(--body)}
+  .aviso strong{color:var(--ink);font-weight:600}
+
+  .aviso-atencao{
+    background:var(--error-soft);
+    border-left:3px solid var(--error);
+  }
+
+  .regras dl{margin:0}
+  .regras dt{
+    display:inline-flex;align-items:center;
+    font-size:12px;font-weight:700;line-height:1;letter-spacing:.02em;
+    padding:6px 10px;border-radius:var(--rounded-pill);
+  }
+  .regras dd{margin:var(--space-2) 0 0;font-size:14px;line-height:1.6;color:var(--body)}
+  .regras dd + dt{margin-top:var(--space-5)}
+  .regras .k-vivo{background:var(--secondary-500);color:var(--on-primary)}
+  .regras .k-cliente{background:var(--warning);color:var(--ink)}
 
   /* ---- lista de decks ---- */
   main .wrap{padding-bottom:var(--space-20)}
@@ -113,32 +136,23 @@
   }
   .meta .sep{color:var(--hairline-strong);padding:0 var(--space-1)}
 
-  /* seletor de tipo — extensão do DS (não há componente de abas no sistema) */
-  .switch{
-    display:inline-flex;align-items:center;gap:2px;
-    background:var(--surface-raised);
-    border:1px solid var(--hairline);
-    border-radius:var(--rounded-pill);
-    padding:3px;
+  /* botão de tipo — um só, alterna a cada clique. Extensão do DS: não há
+     componente de seletor no sistema; a cor identifica a versão ativa. */
+  .modo{
+    display:inline-flex;align-items:center;gap:var(--space-2);
+    font-family:inherit;font-size:12px;font-weight:700;line-height:1;
+    letter-spacing:.02em;white-space:nowrap;
+    border:0;cursor:pointer;
+    padding:9px 12px;border-radius:var(--rounded-pill);
   }
-  .switch button{
-    font-family:inherit;font-size:12px;font-weight:600;line-height:1;
-    letter-spacing:.01em;color:var(--body);
-    background:transparent;border:0;cursor:pointer;
-    padding:7px 12px;border-radius:var(--rounded-pill);
-    white-space:nowrap;
-  }
-  .switch button:hover{color:var(--ink)}
-  .switch button[aria-pressed="true"]{background:var(--primary-500);color:var(--on-primary)}
+  .modo svg{width:13px;height:13px;flex:none;opacity:.75}
+  .modo[data-variant="vivo"]{background:var(--secondary-500);color:var(--on-primary)}
+  .modo[data-variant="vivo"]:hover{background:var(--secondary-400)}
+  .modo[data-variant="cliente"]{background:var(--warning);color:var(--ink)}
+  .modo[data-variant="cliente"]:hover{background:#d98a08}
 
   .card h3{margin:var(--space-4) 0 var(--space-2);font-size:20px;line-height:1.3;font-weight:700}
-  .card p.desc{margin:0 0 var(--space-4);font-size:15px;line-height:1.6;color:var(--body)}
-  .variant{
-    margin:0 0 var(--space-6);
-    padding-left:var(--space-3);
-    border-left:2px solid var(--hairline);
-    font-size:13px;line-height:1.55;color:var(--muted);
-  }
+  .card p.desc{margin:0 0 var(--space-6);font-size:15px;line-height:1.6;color:var(--body)}
   .actions{margin-top:auto;display:flex;flex-direction:column;align-items:stretch;gap:var(--space-2)}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;
@@ -173,11 +187,23 @@
 <main>
   <div class="wrap">
 
-    <div class="notice-anchor">
-      <div class="notice">
-        <h2>Página de uso interno da equipe</h2>
-        <p>Este endereço é da equipe Beyond Co. — <strong>não envie o link para o cliente.</strong> Para compartilhar externamente, use a versão <strong>Envio p/ cliente</strong> e mande o arquivo baixado. O link fica reservado a quem apresenta e à equipe interna.</p>
+    <div class="avisos">
+
+      <div class="aviso aviso-atencao">
+        <h2>Atenção: página de uso interno da equipe</h2>
+        <p>Este endereço é da equipe Beyond Co. — <strong>não envie o link para o cliente.</strong> Para compartilhar externamente, troque a versão para <strong>Envio p/ cliente</strong> e mande o arquivo baixado. O link fica reservado a quem apresenta e à equipe interna.</p>
       </div>
+
+      <div class="aviso regras">
+        <h2>Qual versão usar</h2>
+        <dl>
+          <dt class="k-vivo">Uso ao vivo</dt>
+          <dd>Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.</dd>
+          <dt class="k-cliente">Envio p/ cliente</dt>
+          <dd>Cada estado interativo virou um slide estático: nada se perde ao baixar e enviar.</dd>
+        </dl>
+      </div>
+
     </div>
 
     <h2 class="section">Disponíveis</h2>
@@ -187,14 +213,14 @@
       <div class="card" data-deck="apresentacao-executiva">
         <div class="cardtop">
           <span class="meta">Comercial <span class="sep">·</span> <span data-role="slides">7 slides</span></span>
-          <div class="switch" role="group" aria-label="Tipo de apresentação">
-            <button type="button" data-variant="vivo" aria-pressed="true">Uso ao vivo</button>
-            <button type="button" data-variant="cliente" aria-pressed="false">Envio p/ cliente</button>
-          </div>
+          <button type="button" class="modo" data-variant="vivo"
+                  aria-label="Versão: Uso ao vivo. Clique para trocar para Envio p/ cliente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h15M16 5l3 3-3 3M20 16H5M8 13l-3 3 3 3"/></svg>
+            <span data-role="modo">Uso ao vivo</span>
+          </button>
         </div>
         <h3>Apresentação Executiva</h3>
         <p class="desc">Visão rápida do Absens: comunicação multicanal com o paciente, tecnologia adaptada à operação do SUS, dashboards de acompanhamento e os resultados em operação real.</p>
-        <p class="variant" data-role="variant">Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.</p>
         <div class="actions">
           <a class="btn btn-primary" data-role="open" href="./apresentacao-executiva/">Abrir apresentação</a>
           <a class="btn btn-secondary" data-role="pdf" href="./apresentacao-executiva/absens-apresentacao-executiva.pdf" download>Baixar PDF <span class="filesize">461 KB</span></a>
@@ -205,14 +231,14 @@
       <div class="card" data-deck="case-inovacao-publica">
         <div class="cardtop">
           <span class="meta">Institucional <span class="sep">·</span> <span data-role="slides">15 slides</span></span>
-          <div class="switch" role="group" aria-label="Tipo de apresentação">
-            <button type="button" data-variant="vivo" aria-pressed="true">Uso ao vivo</button>
-            <button type="button" data-variant="cliente" aria-pressed="false">Envio p/ cliente</button>
-          </div>
+          <button type="button" class="modo" data-variant="vivo"
+                  aria-label="Versão: Uso ao vivo. Clique para trocar para Envio p/ cliente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h15M16 5l3 3-3 3M20 16H5M8 13l-3 3 3 3"/></svg>
+            <span data-role="modo">Uso ao vivo</span>
+          </button>
         </div>
         <h3>Case de Inovação Pública</h3>
         <p class="desc">A trajetória do Absens do edital do Recife a três operações públicas: o problema do absenteísmo, a hipótese, o que a operação real ensinou, os resultados, as premiações e o caminho de contratação.</p>
-        <p class="variant" data-role="variant">Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.</p>
         <div class="actions">
           <a class="btn btn-primary" data-role="open" href="./case-inovacao-publica/">Abrir apresentação</a>
           <a class="btn btn-secondary" data-role="pdf" href="./case-inovacao-publica/absens-case-inovacao-publica.pdf" download>Baixar PDF <span class="filesize">357 KB</span></a>
@@ -232,25 +258,25 @@
 
 <script>
 (function(){
-  var VIVO = 'Slides interativos e ambientes simulados, para conduzir a apresentação ao vivo.';
-  var CLIENTE = 'Cada estado interativo virou um slide estático: nada se perde ao baixar e enviar.';
+  var ROTULO = { vivo:'Uso ao vivo', cliente:'Envio p/ cliente' };
+  var OUTRA  = { vivo:'cliente', cliente:'vivo' };
 
   var DECKS = {
     'apresentacao-executiva': {
       vivo:    { slides:7,  dir:'./apresentacao-executiva/',
                  pdf:'absens-apresentacao-executiva.pdf',           pdfKB:'461 KB',
-                 html:'absens-apresentacao-executiva.html',         htmlKB:'822 KB', nota:VIVO },
+                 html:'absens-apresentacao-executiva.html',         htmlKB:'822 KB' },
       cliente: { slides:16, dir:'./apresentacao-executiva/cliente/',
                  pdf:'absens-apresentacao-executiva-cliente.pdf',   pdfKB:'818 KB',
-                 html:'absens-apresentacao-executiva-cliente.html', htmlKB:'694 KB', nota:CLIENTE }
+                 html:'absens-apresentacao-executiva-cliente.html', htmlKB:'694 KB' }
     },
     'case-inovacao-publica': {
       vivo:    { slides:15, dir:'./case-inovacao-publica/',
                  pdf:'absens-case-inovacao-publica.pdf',            pdfKB:'357 KB',
-                 html:'absens-case-inovacao-publica.html',          htmlKB:'436 KB', nota:VIVO },
+                 html:'absens-case-inovacao-publica.html',          htmlKB:'436 KB' },
       cliente: { slides:23, dir:'./case-inovacao-publica/cliente/',
                  pdf:'absens-case-inovacao-publica-cliente.pdf',    pdfKB:'619 KB',
-                 html:'absens-case-inovacao-publica-cliente.html',  htmlKB:'468 KB', nota:CLIENTE }
+                 html:'absens-case-inovacao-publica-cliente.html',  htmlKB:'468 KB' }
     }
   };
 
@@ -259,7 +285,6 @@
     var q = function(sel){ return card.querySelector(sel); };
 
     q('[data-role="slides"]').textContent = v.slides + ' slides';
-    q('[data-role="variant"]').textContent = v.nota;
 
     q('[data-role="open"]').setAttribute('href', v.dir);
 
@@ -272,15 +297,16 @@
     html.setAttribute('download', v.html);
     html.querySelector('.filesize').textContent = v.htmlKB;
 
-    Array.prototype.forEach.call(card.querySelectorAll('.switch button'), function(b){
-      b.setAttribute('aria-pressed', String(b.dataset.variant === chave));
-    });
+    var botao = q('.modo');
+    botao.dataset.variant = chave;
+    q('[data-role="modo"]').textContent = ROTULO[chave];
+    botao.setAttribute('aria-label',
+      'Versão: ' + ROTULO[chave] + '. Clique para trocar para ' + ROTULO[OUTRA[chave]]);
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('.card[data-deck]'), function(card){
-    card.querySelector('.switch').addEventListener('click', function(e){
-      var b = e.target.closest('button[data-variant]');
-      if (b) aplica(card, b.dataset.variant);
+    card.querySelector('.modo').addEventListener('click', function(){
+      aplica(card, OUTRA[card.querySelector('.modo').dataset.variant]);
     });
   });
 })();
