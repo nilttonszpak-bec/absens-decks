@@ -452,6 +452,21 @@ svg[role="img"] [data-rvd]{opacity:0}
 .slide.rv svg[role="img"] [data-rvd]{
   animation:mo-fade 130ms linear both,mo-draw var(--mo-draw) var(--mo-curve) both;
   animation-delay:calc(var(--i,0) * var(--mo-svg) + var(--mo-svg-in))}
+/* ---- entrada da réplica de resultados (.xf) ----
+   A réplica vive dentro de um scale(1,7778): um deslocamento de 15px ali
+   renderiza 26,7px na tela e a cascata sai mais alta que no resto do deck.
+   8,4px locais dão os mesmos 15px aparentes. */
+@keyframes mo-up-xf{from{opacity:0;transform:translateY(8.4px)}to{opacity:1;transform:none}}
+.slide[data-exec].rv [data-rv]{animation-name:mo-up-xf}
+/* são 16 alvos dentro da réplica; com o passo padrão de 78ms a cascata levaria
+   1,3s só para começar o último. 46ms mantém o total na faixa dos outros slides */
+.slide[data-exec]{--mo-step:46ms}
+/* troca de cliente na réplica: o que muda de conteúdo entra com o mesmo fade
+   curto da troca de painel do slide dos desafios, no compasso dos 520ms da
+   contagem dos números. Miro nos FILHOS (#crests img, #extra ul) e não nos
+   alvos da cascata: um seletor de id venceria a regra de entrada e o elemento
+   perderia a animação de chegada do slide. */
+.xf.sw #crests img,.xf.sw #cname,.xf.sw #extra ul{animation:mo-fade 300ms var(--mo-curve) both}
 /* troca de painel no slide dos desafios */
 .dz-panel.on{animation:mo-fade 300ms linear both}
 .dz-panel.on>.dz-sol{animation:mo-up 460ms var(--mo-curve) both}
@@ -508,7 +523,7 @@ svg[role="img"] [data-rvd]{opacity:0}
   </div>
 </section>
 
-<!-- SLIDE 02 | Ato 1 · A pergunta | Fonte de conteúdo: Manual de Vendas §Como surgiu o Absens (redação adotada, conforme aval do solicitante) + Prefeitura do Recife 26/07/2022 (programação oficial, que grafa "abstenção") + Manual §Premiações ("mais de 60 soluções inscritas") | Tokens/componentes: --gradient-primary, blockquote 34px/600, --accent nas aspas (única voltagem lime do slide), .kpi-sep | Pendências: [A CONFIRMAR] total de soluções inscritas -->
+<!-- SLIDE 02 | Ato 1 · A pergunta | Fonte de conteúdo: Manual de Vendas §Como surgiu o Absens (redação adotada, conforme aval do solicitante) + Prefeitura do Recife 26/07/2022 (programação oficial, que grafa "abstenção") + Manual §Premiações | Tokens/componentes: --gradient-primary, blockquote 34px/600, --accent nas aspas (única voltagem lime do slide), .kpi-sep | O total de soluções inscritas no edital é EXATAMENTE 60, confirmado pelo solicitante em 19/08/2026 e já atualizado no Manual, que antes dizia "mais de 60". É o número que o slide traz | Pendências: nenhuma -->
 <section class="slide dark" data-act="A pergunta">
   <div class="kicker fix">A pergunta do edital <i style="font-style:normal;opacity:.4">·</i> novembro de 2021</div>
   <div class="glow"></div>
@@ -1443,7 +1458,7 @@ svg[role="img"] [data-rvd]{opacity:0}
 </section>
 
 
-<!-- SLIDE 12.1 | Versao para compartilhar: aba "Consolidado" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute | Pendências: [A CONFIRMAR] valor investido pela Prefeitura para recálculo do ROI (registrado no comentário final, fora do slide, para preservar a composição original) -->
+<!-- SLIDE 12.1 | Versao para compartilhar: aba "Consolidado" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute -->
 <section class="slide dark" data-act="Conquistas" data-exec="1">
   <div class="kicker fix">Conquistas</div>
   <div class="xf">
@@ -1463,7 +1478,7 @@ svg[role="img"] [data-rvd]{opacity:0}
   <div class="foot"></div><div class="foot-t">CASE DE INOVAÇÃO PÚBLICA</div><svg class="logo foot-l" viewBox="-5.985 -5.985 748.97 182.97"><use href="#absens-mark"/></svg>
   </div>
 </section>
-<!-- SLIDE 12.2 | Versao para compartilhar: aba "Recife" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute | Pendências: [A CONFIRMAR] valor investido pela Prefeitura para recálculo do ROI (registrado no comentário final, fora do slide, para preservar a composição original) -->
+<!-- SLIDE 12.2 | Versao para compartilhar: aba "Recife" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute -->
 <section class="slide dark" data-act="Conquistas" data-exec="1">
   <div class="kicker fix">Conquistas</div>
   <div class="xf">
@@ -1483,7 +1498,7 @@ svg[role="img"] [data-rvd]{opacity:0}
   <div class="foot"></div><div class="foot-t">CASE DE INOVAÇÃO PÚBLICA</div><svg class="logo foot-l" viewBox="-5.985 -5.985 748.97 182.97"><use href="#absens-mark"/></svg>
   </div>
 </section>
-<!-- SLIDE 12.3 | Versao para compartilhar: aba "Cajamar" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute | Pendências: [A CONFIRMAR] valor investido pela Prefeitura para recálculo do ROI (registrado no comentário final, fora do slide, para preservar a composição original) -->
+<!-- SLIDE 12.3 | Versao para compartilhar: aba "Cajamar" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute -->
 <section class="slide dark" data-act="Conquistas" data-exec="1">
   <div class="kicker fix">Conquistas</div>
   <div class="xf">
@@ -1503,7 +1518,7 @@ svg[role="img"] [data-rvd]{opacity:0}
   <div class="foot"></div><div class="foot-t">CASE DE INOVAÇÃO PÚBLICA</div><svg class="logo foot-l" viewBox="-5.985 -5.985 748.97 182.97"><use href="#absens-mark"/></svg>
   </div>
 </section>
-<!-- SLIDE 12.4 | Versao para compartilhar: aba "Amazonas" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute | Pendências: [A CONFIRMAR] valor investido pela Prefeitura para recálculo do ROI (registrado no comentário final, fora do slide, para preservar a composição original) -->
+<!-- SLIDE 12.4 | Versao para compartilhar: aba "Amazonas" fixa | Ato 5 · Hoje | Cabeçalho (rótulo, título e subtítulo) trazido do antigo slide 12, que foi removido a pedido; o corpo segue sendo RÉPLICA do slide de resultados de absens-apresentacao-executiva-final.html: o markup original foi mantido intacto dentro de um quadro de 720x405 escalado por CSS (fator 1,7778), com o CSS do deck executivo reescopado sob .xf. Únicas alterações: rodapé esquerdo passa a "APRESENTAÇÃO DO CICLO DE CPSI", o rótulo do terceiro KPI perde o sufixo "· 12 MESES" e a legenda passa a declarar o período de cada cliente — porque os números aqui são os do Manual de Vendas, não os do anexo | Fonte de conteúdo: Manual de Vendas do Absens §Cases (Recife, Amazonas, Cajamar), apurados em 10/08/2026 | Tokens/componentes: .xf (escopo do deck executivo), --grad-primary, --grad-accent, --accent, --on-dark-soft, --on-dark-mute -->
 <section class="slide dark" data-act="Conquistas" data-exec="1">
   <div class="kicker fix">Conquistas</div>
   <div class="xf">
@@ -1523,57 +1538,63 @@ svg[role="img"] [data-rvd]{opacity:0}
   <div class="foot"></div><div class="foot-t">CASE DE INOVAÇÃO PÚBLICA</div><svg class="logo foot-l" viewBox="-5.985 -5.985 748.97 182.97"><use href="#absens-mark"/></svg>
   </div>
 </section>
-<!-- SLIDE 13 | Ato 5 · Conquistas | Slide criado a pedido do solicitante | Fonte de conteúdo: Manual de Vendas §Premiações, levantado em 11/08/2026 em fontes oficiais — as sete premiações do produto, na ordem cronológica, com promotor e resultado. O Absens é copropriedade Beyond/Emprel e em quase todas quem inscreve é a Emprel ou a Prefeitura do Recife | Tokens/componentes: linha do tempo em SVG (.sv-line, .sv-fill-a, .sv-accent no último marco), rótulos escalonados acima e abaixo da linha para sete marcos não colidirem | Pendências: a colocação no 6º Prêmio Conexão Inova não é afirmada no slide. O próprio Manual marca "[CONFIRMAR: colocação]" — registra 1º lugar a partir de publicação secundária, enquanto a fonte oficial consultada (TRE-GO) não lista os demais colocados. Assim que confirmar, basta trocar "categoria de IA" por "1º lugar, categoria de IA" -->
+<!-- SLIDE 13 | Ato 5 · Conquistas | Slide criado a pedido do solicitante | Fonte de conteúdo: Manual de Vendas §Premiações, na versão baixada em 19/08/2026 — as OITO premiações do produto, em ordem cronológica, com promotor e resultado. O Absens é copropriedade Beyond/Emprel e em quase todas quem inscreve é a Emprel ou a Prefeitura do Recife | Tokens/componentes: linha do tempo em SVG (.sv-line, .sv-fill-a, .sv-accent no último marco), rótulos escalonados acima e abaixo da linha, gerados por build/mk_premios.py — título, resultado e detalhe são listas de linhas. A linha do tempo fica em y=160 num SVG de 300u: cabem 7 linhas acima e 6 abaixo. Regra de quebra: cada linha deve ficar próxima da largura do TÍTULO do próprio prêmio, não do orçamento duro de 327u (o passo entre marcos da mesma fileira). overflow:visible no SVG para o primeiro ponto (cx=0, r=5) não ser cortado | TODO o texto do slide está coberto pelo Manual na versão de 19/08/2026, que ganhou os promotores e o uso do ranking: "100 Open Startups, por iniciativa do Centro de Open Innovation Brasil"; "Necta, que realiza o Connected Smart Cities desde 2015 em parceria com a Urban Systems"; "Rede Conexão Inovação Pública"; e a autorização explícita para apresentar o produto como "uma das 100 ideias mais inovadoras da América Latina", porque a premiação do congresso é integrada ao Ranking 100 Open Startups. "maior nota geral" e "entre os primeiros colocados" traduzem o resultado do prêmio de Excelência ("maior nota global entre os primeiros colocados das seis categorias"). RESSALVA DO PRÓPRIO MANUAL, registrada aqui para decisão consciente: ele recomenda que, "em documento que instrui contratação pública", se prefira a descrição técnica — "1º lugar na categoria Saúde, com publicação em anais com ISBN e DOI" — em vez da formulação de marketing das 100 ideias. Este deck é apresentação de case, não instrumento de contratação, e a redação atual foi ditada pelo solicitante em 19/08/2026 | Colocação no 6º Prêmio Conexão Inova: CONFIRMADA. O Manual de 19/08/2026 já não traz o bullet "[CONFIRMAR: colocação]" e o certificado (1º lugar) foi visto pelo solicitante. A frase vencida que sobrava no fim da Argumentação Comercial do Manual ("enquanto a colocação não for confirmada, fale em premiação na categoria de IA, sem citar o lugar") foi corrigida no documento — o solicitante confirmou em 19/08/2026 | O título do congresso vai sem "de Casos" (o Manual grafa "4º Congresso Latino-Americano de Casos de Open Innovation") por limite de largura | Pendências: nenhuma -->
 <section class="slide light" data-act="Conquistas">
   <div class="kicker fix">Conquistas</div>
   <div class="title-wrap">
     <h2>Oito premiações em quatro anos</h2>
     <p class="lead" style="max-width:900px">O reconhecimento acompanha a operação. De vencedor de um edital municipal, ao topo da premiação digital no Brasil.</p>
   </div>
-  <svg viewBox="0 0 1152 268" style="width:1152px;height:268px;margin-top:22px;overflow:visible" role="img" aria-label="Linha do tempo das oito premiacoes do Absens, de 2022 a 2026">
-    <line class="sv-line" x1="0" y1="132" x2="1146" y2="132"/>
-    <circle class="sv-fill-a" cx="0" cy="132" r="5"/>
-    <text class="sv-l" x="0" y="44">AGO / 2022</text>
-    <text class="sv-t" x="0" y="68">1º Ciclo de Inovação Aberta</text>
-    <text class="sv-s" x="0" y="90">vencedor do desafio de absenteísmo</text>
-    <text class="sv-s" x="0" y="108" style="font-size:11px;fill:var(--muted)">EITA! Recife · entre as 60 soluções</text>
-    <circle class="sv-fill-a" cx="164" cy="132" r="5"/>
-    <text class="sv-l" x="164" y="162">MAR / 2023</text>
-    <text class="sv-t" x="164" y="186">Prêmio Recife de Inovação Aberta</text>
-    <text class="sv-s" x="164" y="208">troféu aos projetos acelerados</text>
-    <text class="sv-s" x="164" y="226" style="font-size:11px;fill:var(--muted)">Prefeitura do Recife · um dos quatro do 1º Ciclo</text>
-    <circle class="sv-fill-a" cx="327" cy="132" r="5"/>
-    <text class="sv-l" x="327" y="26">AGO / 2025</text>
-    <text class="sv-t" x="327" y="50">Congresso Latino-Americano</text>
-    <text class="sv-t" x="327" y="68">de Open Innovation</text>
-    <text class="sv-s" x="327" y="90">1º lugar na categoria Saúde</text>
-    <text class="sv-s" x="327" y="108" style="font-size:11px;fill:var(--muted)">banca técnica · anais com ISBN e DOI</text>
-    <circle class="sv-fill-a" cx="491" cy="132" r="5"/>
-    <text class="sv-l" x="491" y="162">SET / 2025</text>
-    <text class="sv-t" x="491" y="186">Connected Smart Cities</text>
-    <text class="sv-s" x="491" y="208">2º lugar, Soluções do Poder Público</text>
-    <text class="sv-s" x="491" y="226" style="font-size:11px;fill:var(--muted)">maior evento de cidades inteligentes do país</text>
-    <circle class="sv-fill-a" cx="655" cy="132" r="5"/>
-    <text class="sv-l" x="655" y="44">MAR / 2026</text>
-    <text class="sv-t" x="655" y="68">6º Prêmio Conexão Inova</text>
-    <text class="sv-s" x="655" y="90">categoria de IA e tecnologias emergentes</text>
-    <text class="sv-s" x="655" y="108" style="font-size:11px;fill:var(--muted)">+700 inscrições dos três Poderes</text>
-    <circle class="sv-fill-a" cx="819" cy="132" r="5"/>
-    <text class="sv-l" x="819" y="162">JUN / 2026</text>
-    <text class="sv-t" x="819" y="186">GovTech Summit</text>
-    <text class="sv-s" x="819" y="208">3º lugar, Startups GovTech</text>
-    <text class="sv-s" x="819" y="226" style="font-size:11px;fill:var(--muted)">GovTech Lab · 156 inscrições</text>
-    <circle class="sv-fill-a" cx="982" cy="132" r="5"/>
-    <text class="sv-l" x="982" y="44">AGO / 2026</text>
-    <text class="sv-t" x="982" y="68">Prêmio GOV.Digital</text>
-    <text class="sv-s" x="982" y="90">1º lugar, categoria de IA</text>
-    <text class="sv-s" x="982" y="108" style="font-size:11px;fill:var(--muted)">ABEP-TIC · 53º SECOP</text>
-    <circle class="sv-accent" cx="1146" cy="132" r="5"/>
-    <text class="sv-l" x="1146" y="162" text-anchor="end">AGO / 2026</text>
-    <text class="sv-t" x="1146" y="186" text-anchor="end">Prêmio ABEP-TIC</text>
-    <text class="sv-t" x="1146" y="204" text-anchor="end">de Excelência</text>
-    <text class="sv-s" x="1146" y="226" text-anchor="end">prêmio máximo</text>
-    <text class="sv-s" x="1146" y="244" text-anchor="end" style="font-size:11px;fill:var(--muted)">maior nota geral</text>
+  <svg viewBox="0 0 1152 300" style="width:1152px;height:300px;margin-top:22px;overflow:visible" role="img" aria-label="Linha do tempo das oito premiacoes do Absens, de 2022 a 2026">
+    <line class="sv-line" x1="0" y1="160" x2="1146" y2="160"/>
+    <circle class="sv-fill-a" cx="0" cy="160" r="5"/>
+    <text class="sv-l" x="0" y="72">AGO / 2022</text>
+    <text class="sv-t" x="0" y="96">1º Ciclo de Inovação Aberta</text>
+    <text class="sv-s" x="0" y="118">vencedor do desafio de absenteísmo</text>
+    <text class="sv-s" x="0" y="136" style="font-size:11px;fill:var(--muted)">EITA! Recife · entre as 60 soluções</text>
+    <circle class="sv-fill-a" cx="164" cy="160" r="5"/>
+    <text class="sv-l" x="164" y="190">MAR / 2023</text>
+    <text class="sv-t" x="164" y="214">Prêmio Recife de Inovação Aberta</text>
+    <text class="sv-s" x="164" y="236">troféu aos projetos acelerados</text>
+    <text class="sv-s" x="164" y="254" style="font-size:11px;fill:var(--muted)">Prefeitura do Recife · um dos quatro do 1º Ciclo</text>
+    <circle class="sv-fill-a" cx="327" cy="160" r="5"/>
+    <text class="sv-l" x="327" y="18">AGO / 2025</text>
+    <text class="sv-t" x="327" y="42">4º Congresso Latino-Americano</text>
+    <text class="sv-t" x="327" y="60">de Open Innovation</text>
+    <text class="sv-s" x="327" y="82">1º lugar, categoria Saúde ·</text>
+    <text class="sv-s" x="327" y="100">100 ideias mais inovadoras</text>
+    <text class="sv-s" x="327" y="118" style="font-size:11px;fill:var(--muted)">100 Open Startups ·</text>
+    <text class="sv-s" x="327" y="136" style="font-size:11px;fill:var(--muted)">banca e anais do congresso</text>
+    <circle class="sv-fill-a" cx="491" cy="160" r="5"/>
+    <text class="sv-l" x="491" y="190">SET / 2025</text>
+    <text class="sv-t" x="491" y="214">Connected Smart Cities</text>
+    <text class="sv-s" x="491" y="236">2º lugar, Soluções do Poder Público</text>
+    <text class="sv-s" x="491" y="254" style="font-size:11px;fill:var(--muted)">Urban Systems e Necta · maior evento</text>
+    <text class="sv-s" x="491" y="272" style="font-size:11px;fill:var(--muted)">de cidades inteligentes do país</text>
+    <circle class="sv-fill-a" cx="655" cy="160" r="5"/>
+    <text class="sv-l" x="655" y="36">MAR / 2026</text>
+    <text class="sv-t" x="655" y="60">6º Prêmio Conexão Inova</text>
+    <text class="sv-s" x="655" y="82">1º lugar, categoria de IA</text>
+    <text class="sv-s" x="655" y="100">e tecnologias emergentes</text>
+    <text class="sv-s" x="655" y="118" style="font-size:11px;fill:var(--muted)">Rede Conexão Inovação Pública ·</text>
+    <text class="sv-s" x="655" y="136" style="font-size:11px;fill:var(--muted)">+700 inscrições dos três Poderes</text>
+    <circle class="sv-fill-a" cx="819" cy="160" r="5"/>
+    <text class="sv-l" x="819" y="190">JUN / 2026</text>
+    <text class="sv-t" x="819" y="214">GovTech Summit</text>
+    <text class="sv-s" x="819" y="236">3º lugar, Startups GovTech</text>
+    <text class="sv-s" x="819" y="254" style="font-size:11px;fill:var(--muted)">GovTech Lab · 156 inscrições</text>
+    <circle class="sv-fill-a" cx="982" cy="160" r="5"/>
+    <text class="sv-l" x="982" y="72">AGO / 2026</text>
+    <text class="sv-t" x="982" y="96">Prêmio GOV.Digital</text>
+    <text class="sv-s" x="982" y="118">1º lugar, categoria de IA</text>
+    <text class="sv-s" x="982" y="136" style="font-size:11px;fill:var(--muted)">ABEP-TIC · 53º SECOP</text>
+    <circle class="sv-accent" cx="1146" cy="160" r="5"/>
+    <text class="sv-l" x="1146" y="190" text-anchor="end">AGO / 2026</text>
+    <text class="sv-t" x="1146" y="214" text-anchor="end">Prêmio ABEP-TIC</text>
+    <text class="sv-t" x="1146" y="232" text-anchor="end">de Excelência</text>
+    <text class="sv-s" x="1146" y="254" text-anchor="end">maior nota geral</text>
+    <text class="sv-s" x="1146" y="272" text-anchor="end" style="font-size:11px;fill:var(--muted)">ABEP-TIC · entre os</text>
+    <text class="sv-s" x="1146" y="290" text-anchor="end" style="font-size:11px;fill:var(--muted)">primeiros colocados</text>
   </svg>
   <div class="foot"></div>
   <div class="foot-t">CASE DE INOVAÇÃO PÚBLICA</div>
@@ -1657,9 +1678,13 @@ svg[role="img"] [data-rvd]{opacity:0}
      Alvo = o bloco que o olho lê como uma unidade: em contêiner de grade, cada
      filho; em invólucro sem classe, o que está dentro. */
   var mo = (function(){
-    var PULA  = '.glow,.foot,.foot-t,.foot-l';
+    var PULA  = '.glow,.foot,.foot-t,.foot-l,.sep';
     var GRUPO = '.grid,.row,.tabs,.dz-cells,.vd-steps,.pmarks';
-    var CAIXA = '.title-wrap,.dz';
+    /* .xf entra aqui para o caminhador DESCER na réplica de resultados: fora da
+       lista ela é um alvo único e o slide inteiro fazia um fade só, sem cascata.
+       Descendo, o invólucro não recebe animação nenhuma — o que preserva o
+       scale(1,7778) dele — e cada elemento de dentro entra na sua vez. */
+    var CAIXA = '.title-wrap,.dz,.xf';
 
     function alvos(raiz){
       var out = [];
@@ -1824,7 +1849,7 @@ por cliente. Saíram o selo "troque o cliente", os dois ouvintes de clique e a
 animação de contagem dos números. Todo o resto — arte, tokens, movimento de
 entrada e navegação — é igual ao mestre. Para regerar depois de mudar o mestre,
 rode o script de novo; não edite esta cópia à mão.
-Rastreabilidade consolidada · revisão 25 · 13/08/2026 · 15 slides · ~15 min 30 s
+Rastreabilidade consolidada · revisão 29 · 19/08/2026 · 15 slides · ~15 min 30 s
 ================================================================================
 
 ATENÇÃO AO LER O HISTÓRICO: a revisão 19 removeu um slide e criou dois, então a
@@ -1834,6 +1859,125 @@ paciente falta · 04 potencializadores · 05 impactos · 06 abertura Primeira
 solução · 07 resposta ao problema (tabela) · 08 abertura Desafios · 09 os seis
 desafios · 10 plataforma de três camadas · 11 abertura Conquistas · 12
 resultados · 13 premiações · 14 contratação · 15 fecho.
+
+O QUE MUDOU NA REVISÃO 29 (a pedido do solicitante)
+  · Nada mudou em tela. O bloco "PENDÊNCIAS [A CONFIRMAR]" do fim deste comentário
+    foi apagado e substituído por "ORIGEM DOS DADOS". Motivo, nas palavras do
+    solicitante: os números vieram dos dashboards da plataforma do Absens, portanto
+    são confiáveis; e os dados de ROI, de taxa de absenteísmo do Recife e de número
+    de unidades não serão usados nesta apresentação — parte deles é informação
+    sensível de operação. A pendência da colocação no Conexão Inova (P6) também
+    saiu: o 1º lugar está afirmado em tela e o Manual de Vendas já o registra.
+  · Saiu também a cláusula "Pendências:" do comentário de cabeçalho do slide 12 e,
+    na sequência, a do slide 02: o total de soluções inscritas no edital é
+    EXATAMENTE 60 — o solicitante confirmou e o Manual, que dizia "mais de 60",
+    já foi atualizado. Não sobrou nenhuma pendência de dado no arquivo.
+  · O histórico das revisões 4 e 5 ficou como está. Ele menciona "A CONFIRMAR" ao
+    narrar o que aconteceu na época; é registro do que foi feito, não pendência
+    viva, e reescrever isso apagaria a memória de como o deck chegou aqui.
+
+O QUE MUDOU NA REVISÃO 28 (a pedido do solicitante)
+  · Slide 12: a réplica de resultados não tinha cascata de entrada — o slide
+    inteiro fazia um fade único e o solicitante leu isso como ausência de
+    movimento. CAUSA: o caminhador da camada de movimento (a função alvos()) só
+    desce em contêiner listado em GRUPO ou CAIXA. ".xf" não estava em nenhuma das
+    duas, então a réplica inteira era UM alvo; e como ela carrega
+    transform:scale(1,7778), caía na regra de fade puro, que existe justamente
+    para o keyframe não apagar a escala.
+    CORREÇÃO: ".xf" entrou em CAIXA. Descendo nela, o invólucro não recebe
+    animação nenhuma — a escala fica intacta, sem precisar de exceção — e cada
+    elemento de dentro entra na sua vez: título, as quatro abas (.tabs já estava
+    em GRUPO, então cada botão é um alvo), a faixa de brasão e nome, os três
+    pares de número e rótulo, as linhas de apoio e a legenda.
+  · Slide 12: dois ajustes para a cascata ficar no mesmo compasso do resto do
+    deck, e não mais alta e mais lenta.
+    AMPLITUDE: dentro do scale(1,7778) um deslocamento de 15px (o mo-up padrão)
+    renderiza 26,7px na tela. Keyframe próprio, mo-up-xf, com 8,4px locais, que
+    dão os mesmos 15px aparentes.
+    PASSO: são 16 alvos; com os 78ms padrão o último só começaria em 1,3s. O
+    seletor .slide[data-exec] redefine --mo-step para 46ms, o que devolve o total
+    para a faixa dos outros slides. O gancho data-exec já existia no slide.
+  · Slide 12: os separadores (.sep) entraram em PULA. São dois fios de 1px; subir
+    junto com o resto fazia o fio tremer. Agora são mobília, como o rodapé.
+  · Slide 12: a troca de cliente ganhou movimento no que muda de conteúdo —
+    brasão, nome do órgão e linhas de apoio entram com um fade de 300ms, o mesmo
+    da troca de painel do slide dos desafios, no compasso dos 520ms da contagem
+    dos números, que já existia. A regra mira nos FILHOS (#crests img, #cname,
+    #extra ul) e não nos alvos da cascata: seletor de id vence a regra de entrada
+    por especificidade e o elemento perderia a animação de chegada do slide.
+    A classe .sw é reiniciada com reflow no meio, senão a animação computada não
+    muda e nada acontece.
+  · Cópia compartilhável: a cascata vale para os quatro slides de resultado dela
+    também, porque vem do mesmo caminhador. O fade de troca não, e está certo —
+    naquela versão não há aba para clicar.
+
+O QUE MUDOU NA REVISÃO 27 (a pedido do solicitante)
+  · Slide 13: as quatro descrições mais longas foram quebradas em duas linhas. O
+    critério que o solicitante deu não é o orçamento de 327u entre marcos, e sim o
+    TÍTULO do próprio prêmio: a descrição não pode se esticar muito além dele nem
+    chegar perto do texto do prêmio vizinho. Quebradas: "1º lugar, categoria Saúde ·
+    / 100 ideias mais inovadoras" (era 311u contra um título de 219u), "100 Open
+    Startups · / banca e anais do congresso" (250u), "1º lugar, categoria de IA / e
+    tecnologias emergentes" (294u contra um título de 168u) e "ABEP-TIC · entre os /
+    primeiros colocados" (210u contra um título de 118u). A quebra é sempre no ponto
+    médio (promotor · contexto) ou entre orações, nunca no meio de uma locução.
+    RESULTADO: a folga mínima entre marcos da mesma fileira subiu de 16,7u para 53u,
+    e nenhuma linha passa de +36u da largura do seu título.
+  · Slide 13, geometria: com quatro linhas novas, o marco do congresso passou a ter
+    7 linhas acima da linha do tempo, e o limite anterior era 5. A linha do tempo
+    desceu de y=132 para y=160 e o SVG cresceu de 268u para 300u de altura — cabe
+    porque o bloco de conteúdo do slide (720 menos os 104 de padding-top e os 88 de
+    base) tinha cerca de 118u de sobra. Agora cabem 7 linhas acima e 6 abaixo.
+    Conferido com build/afere.py: zero colisões entre os 40 rótulos livres.
+  · Fonte: o Manual de Vendas foi baixado de novo em 19/08/2026 e §Premiações está
+    bem mais detalhado — cada prêmio ganhou um bullet "Evento" e os promotores que
+    faltavam. As três informações que a revisão 26 registrou como "vindas do
+    solicitante, fora do Manual" agora CONSTAM do documento: 100 Open Startups (por
+    iniciativa do Centro de Open Innovation Brasil), Necta com a Urban Systems, e o
+    uso de "uma das 100 ideias mais inovadoras da América Latina", que o Manual
+    explica ser válido porque a premiação do congresso é integrada ao Ranking 100
+    Open Startups. O bullet "[CONFIRMAR: colocação]" do Conexão Inova saiu do
+    Manual. A cópia local em fontes/manual-vendas.txt foi substituída.
+
+O QUE MUDOU NA REVISÃO 26 (a pedido do solicitante)
+  · Slide 13: oito trocas de texto na linha do tempo, todas ditadas pelo
+    solicitante. "Congresso Latino-Americano de Open Innovation" -> "4º Congresso
+    Latino-Americano de Open Innovation" (o Manual grafa "4º Congresso
+    Latino-Americano de CASOS de Open Innovation"; o "de Casos" fica de fora por
+    limite de largura). "1º lugar na categoria Saúde" -> "1º lugar, categoria
+    Saúde · 100 ideias mais inovadoras". "banca técnica · anais com ISBN e DOI" ->
+    "100 Open Startups · banca e anais do congresso". "maior evento de cidades
+    inteligentes do país" -> "Urban Systems e Necta · maior evento de cidades
+    inteligentes do país". "categoria de IA e tecnologias emergentes" -> "1º lugar,
+    categoria de IA e tecnologias emergentes". "+700 inscrições dos três Poderes"
+    -> "Rede Conexão Inovação Pública · +700 inscrições dos três Poderes". No
+    último marco, a linha de resultado passou a "maior nota geral" e a de apoio a
+    "ABEP-TIC · entre os primeiros colocados" — as duas trocas são uma
+    substituição posicional, não sequencial: aplicar em cadeia sobrescreveria a
+    primeira.
+    FONTES: "Rede Conexão Inovação Pública" é o promotor que o Manual registra;
+    "maior nota geral" e "entre os primeiros colocados" traduzem o resultado do
+    Manual ("venceu por ter obtido a maior nota global entre os primeiros
+    colocados das seis categorias"). Três informações NÃO constam do Manual e
+    vieram do solicitante: "100 Open Startups" (o Manual dá o promotor como Open
+    Innovation Week / Oiweek Latam, dentro da Rio Innovation Week), "Urban Systems
+    e Necta" (o Manual diz "plataforma Connected Smart Cities") e "100 ideias mais
+    inovadoras".
+  · Slide 13: com "1º lugar" no 6º Prêmio Conexão Inova, o deck agora AFIRMA a
+    colocação. Confirmada em 19/08/2026 pelo solicitante e pelo certificado; o
+    "[CONFIRMAR: colocação]" do Manual está vencido. Era a última pendência em
+    tela do slide.
+  · Slide 13, layout: três descrições novas passaram do orçamento de 327u (o passo
+    entre marcos da mesma fileira) e foram quebradas em duas linhas — Connected
+    Smart Cities (359u), Conexão Inova (348u) e, no marco do congresso, nenhuma:
+    a linha de 311u caberia. Para isso o gerador build/mk_premios.py passou a
+    tratar título, resultado E detalhe como listas de linhas. Acima da linha do
+    tempo cabem 5 linhas por marco (a sexta empurraria a data para y=8, colada no
+    subtítulo do slide); abaixo cabem 6, porque o marco final já usava y=244.
+    Conferido com build/afere.py: zero colisões entre os 36 rótulos livres. A
+    folga mais apertada ficou em 16,7u, entre o resultado do congresso e o apoio
+    do Conexão Inova — cores e tamanhos diferentes (--body-color 12,5px contra
+    --muted 11px) separam a leitura.
 
 O QUE MUDOU NA REVISÃO 25 (a pedido do solicitante)
   · Slide 12: a legenda "Números apurados até 10/08/2026." desceu de top:314 para
@@ -2425,26 +2569,20 @@ DIVERGÊNCIAS ENTRE FONTES
   D9. Premiações. A apresentação de solução cita "100 ideias mais inovadoras da
       LATAM", que não consta na lista de premiações do Manual. Não citada em slide.
 
-PENDÊNCIAS [A CONFIRMAR]
-  Nenhuma aparece mais em tela. Registradas apenas aqui:
-  P1. número de unidades de saúde cobertas em cada operação — o chip saiu junto com
-      o slide "Onde opera", removido na revisão 9.
-  Resolvida na revisão 5: a data do marco "Novos clientes" (NOV/2024, contratação
-  da SES-MS) foi informada pelo solicitante. Ela não consta de nenhuma das fontes
-  documentais consultadas e está registrada aqui como informação do cliente.
-  Registradas apenas aqui, para não poluir slides cuja composição foi fechada pelo
-  solicitante:
-  P3. taxa de absenteísmo do Recife antes do Absens. Sem ela, a queda de 14,03 p.p.
-      fica sem denominador explícito. A base implícita de ~55% é aritmeticamente
-      coerente com os dois números publicados, mas NÃO foi afirmada em nenhuma fonte
-      e por isso não aparece em nenhum slide.
-  P4. valor investido pela Prefeitura do Recife, para recalcular o ROI. Pendência
-      registrada pelo próprio Manual de Vendas.
-  P5. números de Cajamar em revisão pelo time do produto. As três linhas de apoio
-      do slide 13, inclusive as 525.521 mensagens enviadas, foram fornecidas pelo
-      solicitante e não constam do Manual de Vendas.
-  P6. colocação no 6º Prêmio Conexão Inova, marcada como [CONFIRMAR] no Manual e por
-      isso não citada em nenhum slide.
+ORIGEM DOS DADOS — não há pendência em aberto
+  O solicitante encerrou o assunto em 19/08/2026: os números desta apresentação vêm
+  dos dashboards da própria plataforma do Absens, ou seja, são dado de origem e não
+  pedem confirmação em fonte documental. Os itens que antes figuravam aqui como
+  pendência — unidades de saúde cobertas, taxa de absenteísmo do Recife antes do
+  Absens e valor investido para recálculo do ROI — ficaram fora do escopo desta
+  peça por decisão dele, e parte deles é informação sensível de operação. Não
+  reabra, não estime e não peça confirmação de novo.
+  · Data do marco "Novos clientes" (NOV/2024, contratação da SES-MS): informada
+    pelo solicitante na revisão 5, não consta das fontes documentais consultadas.
+  · Três linhas de apoio de Cajamar, inclusive as 525.521 mensagens enviadas:
+    fornecidas pelo solicitante a partir dos dashboards da plataforma.
+  · Colocação no 6º Prêmio Conexão Inova: 1º lugar, afirmado em tela. O Manual de
+    Vendas de 19/08/2026 traz o resultado e não marca mais [CONFIRMAR].
 
 DECISÃO EM ABERTO SOBRE O SLIDE 20
   O solicitante pediu que o slide de resultados fosse igual ao do deck executivo. A
